@@ -1,0 +1,25 @@
+<!--- creacion bloque herencia django -->
+{% extends "AppCoder/base.html" %}
+
+{% load static %}
+{% block contenidoQueCambia %}
+<head>
+    <title>Resultado de la busqueda</title>
+</head>
+
+<!--- Bloque para agregar el contenido que vamos a utilizar -->
+
+    
+
+
+
+<p>Estamos buscando la comision: {{ comision }}</p>
+
+
+<ul>
+    {% for resultado in resultados %}
+        <li>Comisión nº <b>{{resultado.comision}}</b>: <u>{{resultado.nombre}}</u> </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

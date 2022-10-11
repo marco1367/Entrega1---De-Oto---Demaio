@@ -1,0 +1,31 @@
+<!--- creacion bloque herencia django -->
+{% extends "AppCoder/base.html" %}
+
+{% load static %}
+{% block contenidoQueCambia %}
+<head>
+    <title>Agregar elemento</title>
+</head>
+<!--- Bloque para agregar el contenido que vamos a utilizar -->
+
+    
+    <!---IF de Error en rojo para formulario -->
+
+    {% if formulario.errors %}
+    <p style="color: red;"> Error: alguno de los datos ingresados es incorrecto, revisar</p> 
+    {% endif %}
+
+    <!--- Formulario con token Django-->
+
+    <form action="" method="POST">{% csrf_token %}
+        <table>
+            {{ formulario.as_table }}
+        </table>
+    </br>
+        <input type="submit" class="submit" value="Guardar">
+        <input type="reset" value="Limpiar Formulario">
+    </form>
+
+
+<!--- Fin de bloque del contenido que vamos a utilizar -->
+{% endblock %}
