@@ -4,8 +4,16 @@
 
 {% block contenidoQueCmabia %}
 <section>
-    <div>
-        <h1>estudiantes, Con herencia</h1>
-    </div>
+    <h1>Agregar un Estudiante:</h1>
+
+    <br>
+
+    <form action="estudiantes" method="post" >
+        {% csrf_token %}
+        <table>
+            {{ miFormulario.as_table }}
+        </table>
+        <input type="submit" value="Agregar Estudiante" >
+    </form>
 </section>
 {% endblock %}

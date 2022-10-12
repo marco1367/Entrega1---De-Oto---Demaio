@@ -13,8 +13,7 @@ def cursos(request):
     if request.method == "POST":
         
         miFormulario = CursoFormulario(request.POST)
-        print(miFormulario)
-        if miFormulario.is_valid:
+        if miFormulario.is_valid():
             info = miFormulario.cleaned_data
             curso = Curso(nombre=info['nombre'], camada=info['camada'])
             curso.save()
@@ -27,16 +26,49 @@ def cursos(request):
 
 
 def entregables(request):
-    return render(request, "AppBootcamps/entregables.html")
+    if request.method == "POST":
+        
+        miFormulario = EntregablesFormulario(request.POST)
+        if miFormulario.is_valid():
+            info = miFormulario.cleaned_data
+            curso = Entregable(nombre=info['nombre'], fechaDeEntrega=info['fechaDeEntrega'], entregado=info['entregado'])
+            curso.save()
+            return render(request, "AppBootcamps/inicio.html")
+    else:
+        miFormulario = EntregablesFormulario()
+    return render(request, "AppBootcamps/entregables.html", {"miFormulario": miFormulario})
+    # return render(request, "AppBootcamps/entregables.html")
 
 
 
 
 def estudiantes(request):
-    return render(request, "AppBootcamps/estudiantes.html")
+    if request.method == "POST":
+        
+        miFormulario = EstudiantesFormulario(request.POST)
+        if miFormulario.is_valid():
+            info = miFormulario.cleaned_data
+            curso = Estudiante(nombre=info['nombre'], apellido=info['apellido'], email=info['email'])
+            curso.save()
+            return render(request, "AppBootcamps/inicio.html")
+    else:
+        miFormulario = EstudiantesFormulario()
+    return render(request, "AppBootcamps/estudiantes.html", {"miFormulario": miFormulario})
+    # return render(request, "AppBootcamps/estudiantes.html")
 
 
 
 
 def profesores(request):
-    return render(request, "AppBootcamps/profesores.html")
+    if request.method == "POST":
+        
+        miFormulario = ProfesoresFormulario(request.POST)
+        if miFormulario.is_valid():
+            info = miFormulario.cleaned_data
+            curso = Profesor(nombre=info['nombre'], apellido=info['apellido'], email=info['email'], profesion=info['profesion'])
+            curso.save()
+            return render(request, "AppBootcamps/inicio.html")
+    else:
+        miFormulario = ProfesoresFormulario()
+    return render(request, "AppBootcamps/profesores.html", {"miFormulario": miFormulario})
+    # return render(request, "AppBootcamps/profesores.html")
