@@ -1,4 +1,4 @@
-import imp
+from django.http import HttpResponse
 from django.shortcuts import render
 from AppBootcamps.models import *
 from AppBootcamps.forms import *
@@ -72,3 +72,22 @@ def profesores(request):
         miFormulario = ProfesoresFormulario()
     return render(request, "AppBootcamps/profesores.html", {"miFormulario": miFormulario})
     # return render(request, "AppBootcamps/profesores.html")
+
+
+
+def BuscarFormulario(request):
+    return render(request, "AppBootcamps/buscarFormulario.html")
+
+def Buscar(request):
+    # respuesta = f"Estoy buscando la camada n°: {request.GET['camada']}"
+
+    # return HttpResponse(respuesta)
+    
+    if request.GET['camada']:
+        camada_a_buscar = request.GET['camada']
+        cursos_encontrados = Curso.objects.filter(camada=camada_a_buscar)
+
+        return render(request, "AppBootcamps/busquedaResultado.html", {"cursos": cursos_encontrados, "camada": camada_a_buscar})
+    else:
+        respuesta = "No enviaste datos para buscar"
+        return render(request, "AppBootcamps/busquedaResultado.html", {"respuesta": respuesta})
